@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="jstl">
+    <CLASSES>
+      <root url="jar://D:/LIB/stripes-1.5.7/stripes-1.5.7/examples/webapp/WEB-INF/lib/jstl.jar!/" />
+      <root url="jar://D:/LIB/stripes-1.5.7/stripes-1.5.7/examples/webapp/WEB-INF/lib/log4j-1.2.15.jar!/" />
+      <root url="jar://D:/LIB/stripes-1.5.7/stripes-1.5.7/examples/webapp/WEB-INF/lib/standard.jar!/" />
+      <root url="jar://D:/LIB/stripes-1.5.7/stripes-1.5.7/examples/webapp/WEB-INF/lib/commons-logging.jar!/" />
+      <root url="jar://D:/LIB/stripes-1.5.7/stripes-1.5.7/examples/webapp/WEB-INF/lib/mail.jar!/" />
+      <root url="jar://D:/LIB/stripes-1.5.7/stripes-1.5.7/examples/webapp/WEB-INF/lib/stripes.jar!/" />
+      <root url="jar://D:/LIB/stripes-1.5.7/stripes-1.5.7/examples/webapp/WEB-INF/lib/cos.jar!/" />
+      <root url="jar://D:/LIB/mysql-connector-java-5.1.22/mysql-connector-java-5.1.22/mysql-connector-java-5.1.22-bin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
