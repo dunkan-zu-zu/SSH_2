@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 import java.util.List;
 import org.apache.log4j.Logger;
 
-import javax.persistence.Query;
+
 
 
 public class StudentDAOImpl implements StudentDAO {
@@ -42,8 +43,10 @@ public class StudentDAOImpl implements StudentDAO {
       /* List<Student> list=sessionFactory.getCurrentSession().createQuery("select s from Student s where s.id=:id").setParameter("id",id).list();
         Student student=list.get(0); */
         List<Student> list=sessionFactory.getCurrentSession().
-                createCriteria(Student.class).list() ;
+                createCriteria(Student.class).add(Restrictions.eq("id", id)).list() ;
+        logger.warn(list);
         Student student=list.get(0);
+        logger.warn(student.getId());
         return  student;
     }
 
@@ -54,7 +57,7 @@ public class StudentDAOImpl implements StudentDAO {
         List student;
 
         student=criteria.list();
-        logger.error(student);
+        logger.warn(student);
         return   student;
 
 

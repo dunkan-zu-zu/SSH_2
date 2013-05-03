@@ -20,6 +20,7 @@ public class    PageUpdateActionBean implements ActionBean {
 
 
     private ActionBeanContext actionBeanContext;
+
     private Long update_id;
     private Long age;
     private String name;
@@ -72,7 +73,7 @@ public class    PageUpdateActionBean implements ActionBean {
 
 
     @DefaultHandler
-    public ForwardResolution view() throws SQLException {
+    public ForwardResolution View() throws SQLException {
 
         logger.warn("Create resolution");
         return new ForwardResolution("/WEB-INF/crud/update.jsp");
