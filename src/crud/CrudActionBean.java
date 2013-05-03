@@ -1,11 +1,21 @@
 package crud;
 
-import DAO.Factory;
+import DAO.StudentDAO;
 import logic.Student;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.controller.StripesFilter;
+import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.integration.spring.SpringHelper;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.stereotype.Controller;
+import service.StudentService;
+import service.StudentServiceImpl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -18,8 +28,19 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 
+
+
 public class CrudActionBean implements ActionBean {
+    private Logger logger=Logger.getLogger(CrudActionBean.class);
+
+    private List<Student> studs;
+
+    @SpringBean
+    StudentService studentService;
+
+
     ActionBeanContext actionBeanContext;
+
 
     private String result;
     private Long Id;
@@ -45,10 +66,13 @@ public class CrudActionBean implements ActionBean {
 
     @DefaultHandler
     public ForwardResolution view() throws SQLException {
+
+
         String str="";
 
-        List<Student> studs = Factory.getInstance().getStudentDAO().getAllStudents();
-
+        studs =studentService
+                .getAllStudents();
+        logger.warn(studs);
 
         for(int i = 0; i < studs.size(); ++i) {
 
@@ -58,12 +82,10 @@ public class CrudActionBean implements ActionBean {
 
         }
         result=str;
-
+        logger.warn("Create resolution");
         return new ForwardResolution("/WEB-INF/crud/index.jsp");
 
     }
-
-
 
 
 

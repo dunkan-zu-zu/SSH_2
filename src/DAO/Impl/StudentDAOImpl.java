@@ -2,96 +2,70 @@ package DAO.Impl;
 
 import DAO.StudentDAO;
 import logic.Student;
+
+
+import org.hibernate.Criteria;
+
 import org.hibernate.Session;
-import util.HibernateUtil;
+import org.hibernate.SessionFactory;
 
-import javax.swing.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+
+
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
+import org.apache.log4j.Logger;
 
-
+import javax.persistence.Query;
 
 
 public class StudentDAOImpl implements StudentDAO {
+ Logger logger= Logger.getLogger(StudentDAOImpl.class);
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
 
     public void addStudent(Student stud) throws SQLException {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(stud);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+
+        sessionFactory.getCurrentSession().save(stud);
     }
 
     public void updateStudent(Student stud) throws SQLException {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.update(stud);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+        sessionFactory.getCurrentSession().saveOrUpdate(stud);
     }
 
     public Student getStudentById(Long id) throws SQLException {
-        Session session = null;
-        Student stud = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            stud = (Student) session.load(Student.class, id);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return stud;
+      /* List<Student> list=sessionFactory.getCurrentSession().createQuery("select s from Student s where s.id=:id").setParameter("id",id).list();
+        Student student=list.get(0); */
+        List<Student> list=sessionFactory.getCurrentSession().
+                createCriteria(Student.class).list() ;
+        Student student=list.get(0);
+        return  student;
     }
 
     public List<Student> getAllStudents() throws SQLException {
-        Session session = null;
-        List<Student> studs = new ArrayList<Student>();
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            studs = session.createCriteria(Student.class).list();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return studs;
+       Session session= sessionFactory.getCurrentSession();
+     Criteria criteria=session.createCriteria(Student.class);
+
+        List student;
+
+        student=criteria.list();
+        logger.error(student);
+        return   student;
+
+
     }
 
-    public void deleteStudent(Student stud) throws SQLException {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.delete(stud);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
+    public void deleteStudent(logic.Student stud) throws SQLException {
+        sessionFactory.getCurrentSession().delete(stud);
+    }
+
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory=sessionFactory;
     }
 }

@@ -1,4 +1,4 @@
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes-dynattr.tld" %>
 <%--
   Created by IntelliJ IDEA.
@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<stripes  beanclass="stripes.crud.CrudActionBean" focus="">
+<stripes  beanclass="crud.CrudActionBean" focus="">
 
 <table align="center"><tr><td><h1>CRUD</h1></tr>
 <tr>

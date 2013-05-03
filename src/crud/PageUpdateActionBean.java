@@ -1,10 +1,12 @@
 package crud;
 
-import DAO.Factory;
+import DAO.StudentDAO;
 import logic.Student;
 import net.sourceforge.stripes.action.*;
-
+import net.sourceforge.stripes.integration.spring.SpringBean;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
+import service.StudentService;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,11 +15,19 @@ import java.sql.SQLException;
  * Time: 12:09
  * To change this template use File | Settings | File Templates.
  */
-public class PageUpdateActionBean implements ActionBean {
+public class    PageUpdateActionBean implements ActionBean {
+        private Logger logger=Logger.getLogger(PageUpdateActionBean.class);
+
+
     private ActionBeanContext actionBeanContext;
     private Long update_id;
     private Long age;
     private String name;
+
+    @SpringBean
+    StudentService studentService;
+
+
 
    //default
     public void setContext(ActionBeanContext actionBeanContext) {
@@ -64,19 +74,23 @@ public class PageUpdateActionBean implements ActionBean {
     @DefaultHandler
     public ForwardResolution view() throws SQLException {
 
-
+        logger.warn("Create resolution");
         return new ForwardResolution("/WEB-INF/crud/update.jsp");
 
     }
 
     public RedirectResolution update() throws SQLException{
 
-         Student st=new Student();
+        Student st=new Student();
         st.setId(update_id);
+        if(age==null){return new RedirectResolution("/crud/PageUpdate.action");}
         st.setAge(age);
+        if(name==null){return new RedirectResolution("/crud/PageUpdate.action");}
         st.setName(name);
-        Factory.getInstance().getStudentDAO().updateStudent(st);
-
-         return new RedirectResolution("/crud/Crud.action");
+        studentService.updateStudent(st);
+        logger.warn("Create redirect");
+        return new RedirectResolution("/crud/Crud.action");
     }
+
+
 }

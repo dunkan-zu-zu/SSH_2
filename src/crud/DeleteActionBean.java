@@ -1,11 +1,14 @@
 package crud;
 
-import DAO.Factory;
+import DAO.StudentDAO;
 import logic.Student;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.RedirectResolution;
+import net.sourceforge.stripes.integration.spring.SpringBean;
+import org.apache.log4j.Logger;
+import service.StudentService;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,7 +22,13 @@ import java.util.List;
  */
 
 public class DeleteActionBean implements ActionBean {
+    private Logger logger=Logger.getLogger(PageUpdateActionBean.class);
     ActionBeanContext actionBeanContext;
+
+
+    @SpringBean
+    StudentService studentService;
+
     private String result;
     private Long Id;
     private String id;
@@ -46,22 +55,14 @@ public class DeleteActionBean implements ActionBean {
     @DefaultHandler
     public RedirectResolution
     Delete() throws SQLException{
-        Student st= Factory.getInstance().getStudentDAO().getStudentById(this.Id);
+        Student st= studentService.getStudentById(this.Id);
 
-        Factory.getInstance().getStudentDAO().deleteStudent(st);
-
-        String str="   ";
-
-        List<Student> studs = Factory.getInstance().getStudentDAO().getAllStudents();
+        studentService.deleteStudent(st);
 
 
-
-        result=str;
-
+        logger.warn("Create redirect");
         return new RedirectResolution("/crud/Crud.action");
     }
-
-
 
 
 

@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
+
+
+
+    <!--
+Описание корневого контейнера, разделяемого всеми сервлетами и фильтрами
+-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>WEB-INF/spring-context.xml</param-value>
+    </context-param>
+
+
+
+
+
+
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
 
 
     <filter>
@@ -15,7 +38,17 @@
             <param-name>ActionResolver.Packages</param-name>
             <param-value>crud</param-value>
         </init-param>
+
+
+        <init-param>
+            <param-name>Interceptor.Classes</param-name>
+            <param-value>
+                net.sourceforge.stripes.integration.spring.SpringInterceptor
+            </param-value>
+        </init-param>
     </filter>
+
+
 
     <filter-mapping>
         <filter-name>StripesFilter</filter-name>
@@ -39,4 +72,7 @@
         <servlet-name>StripesDispatcher</servlet-name>
         <url-pattern>*.action</url-pattern>
     </servlet-mapping>
+
+
 </web-app>
+

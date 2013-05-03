@@ -1,39 +1,43 @@
 package logic;
 
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
+
 
 @Entity
 @Table(name="Student")
-public class Student {
+public class Student implements Serializable{
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name="increment", strategy = "increment")
 
+    @Column(name="id")
     private Long id;
-    private String name;
+
+
+
+
+    @Column(name="age")
     private Long age;
 
-    public Student(){
-        name = null;
-    }
 
-    public Student(Student s){
-        name = s.getName();
-    }
+    @Column(name="name")
+    private String name;
 
-    @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
-    @Column(name="id")
+
     public Long getId() {
         return id;
     }
 
-    @Column(name="name")
+
     public String getName(){
         return name;
     }
 
-    @Column(name="age")
+
     public Long getAge(){
         return age;
     }

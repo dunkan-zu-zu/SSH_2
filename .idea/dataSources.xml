@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3577845152">
+    <data-source source="LOCAL" name="hibernate.cfg.xml" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="827239e8-39c5-44c3-94f8-7fdc958dd7a9">
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost/test</jdbc-url>
+      <user-name>sqluser</user-name>
+      <user-password>dfd9dfdbdfc6dfdfdfd9dfcfdfd8dfdadfdd</user-password>
+      <libraries>
+        <library>
+          <url>jar://$USER_HOME$/Downloads/mysql-connector-java-5.1.22/mysql-connector-java-5.1.22/mysql-connector-java-5.1.22-bin.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Data Source [2]" product="MySQL" version="5.5.23" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.22 ( Revision: ${bzr.revision-id} )" uuid="f596c49b-e7b6-48eb-b1d1-24e566d6814c">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost/test</jdbc-url>
+      <user-name>sqluser</user-name>
+      <user-password>dfd9dfdbdfc6dfdfdfd9dfcfdfd8dfdadfdd</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/Downloads/mysql-connector-java-5.1.22/mysql-connector-java-5.1.22/mysql-connector-java-5.1.22-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
+
